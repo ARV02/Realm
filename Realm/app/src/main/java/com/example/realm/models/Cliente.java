@@ -10,14 +10,31 @@ public class Cliente extends RealmObject {
     private int id;
     private String nombre;
     private String apellidos;
-    private int pedido;
+    private  String correo;
+    private int numero_de_telefono;
     private Date createdAt;
+
+    public Cliente() {
+    }
+
     public void setId(int id){
         this.id = MyApplication.NoteId.incrementAndGet();
         this.id=0;
     }
     public int getId(){
         return id;
+    }
+    public void setCorreo(String correo){
+        this.correo=correo;
+    }
+    public String getCorreo(){
+        return correo;
+    }
+    public void setNumero_de_telefono(int numero_de_telefono){
+        this.numero_de_telefono=numero_de_telefono;
+    }
+    public int getNumero_de_telefono(){
+        return numero_de_telefono;
     }
     public void setNombre(String nombre){
         this.nombre = nombre;
@@ -30,12 +47,6 @@ public class Cliente extends RealmObject {
     }
     public String getApellidos(){
         return apellidos;
-    }
-    public void setPedido(int pedido){
-        this.pedido=pedido;
-    }
-    public int getPedido(){
-        return pedido;
     }
     public void setCreatedAt(Date createdAt){
         this.createdAt=createdAt;

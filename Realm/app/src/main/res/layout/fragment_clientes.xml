@@ -7,32 +7,56 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <EditText
-        android:id="@+id/editText"
+   <EditText
+        android:id="@+id/nom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="100dp"
         android:layout_marginLeft="90dp"
         android:gravity="center"
         android:inputType="textPersonName"
         android:hint="@string/nombre"
         android:layout_marginStart="90dp" />
     <EditText
+        android:id="@+id/apellidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="180dp"
         android:layout_marginLeft="90dp"
         android:layout_marginStart="90dp"
         android:inputType="textPersonName"
         android:hint="Apellidos"/>
     <EditText
+        android:id="@+id/correo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:gravity="center"
         android:layout_marginLeft="90dp"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="105dp"/>
+        android:layout_marginTop="260dp"
+        android:inputType="textEmailAddress"
+        android:hint="Correo"/>
+    <EditText
+        android:id="@+id/numero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:layout_marginLeft="90dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="330dp"
+        android:inputType="number"
+        android:hint="Numero de telefono"/>
+    <Button
+        android:id="@+id/guardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:layout_marginStart="150dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="390dp"/>
 </FrameLayout>
