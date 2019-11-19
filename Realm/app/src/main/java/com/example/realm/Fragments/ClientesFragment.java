@@ -5,14 +5,18 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.realm.R;
 import com.example.realm.models.Cliente;
+
+import io.realm.Realm;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +24,7 @@ import com.example.realm.models.Cliente;
 public class ClientesFragment extends Fragment {
     private EditText nomb,apellidos,nume,correo;
     private Button guardar;
+    Realm realmDb;
 
     public ClientesFragment() {
         // Required empty public constructor
@@ -36,6 +41,8 @@ public class ClientesFragment extends Fragment {
         nume = rootView.findViewById(R.id.numero);
         correo = rootView.findViewById(R.id.correo);
         guardar = rootView.findViewById(R.id.guardar);
+        Realm.init(getActivity());
+        realmDb=Realm.getDefaultInstance();
         Registrar(rootView);
         return rootView;
     }
@@ -43,16 +50,25 @@ public class ClientesFragment extends Fragment {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cliente cliente = new Cliente();
-                int numero = Integer.parseInt(nume.getText().toString());
-                String nom = nomb.getText().toString();
-                String apellido = apellidos.getText().toString();
-                String email = correo.getText().toString();
-                cliente.setNombre(nom);
-                cliente.setApellidos(apellido);
-                cliente.setCorreo(email);
-                cliente.setNumero_de_telefono(numero);
-                limpiar();
+                try {
+                    realmDb.beginTransaction();
+                    Cliente cliente = realmDb.createObject(Cliente.class);
+                    int numero = Integer.parseInt(nume.getText().toString());
+                    String nom = nomb.getText().toString();
+                    String apellido = apellidos.getText().toString();
+                    String email = correo.getText().toString();
+                    cliente.setNombre(nom);
+                    cliente.setApellidos(apellido);
+                    cliente.setCorreo(email);
+                    cliente.setNumero_de_telefono(numero);
+                    realmDb.insertOrUpdate(cliente);
+                    realmDb.commitTransaction();
+                    limpiar();
+                    Toast.makeText(getContext(),"Cliente registrado exitosamente",Toast.LENGTH_LONG).show();
+                }catch (Exception ex){
+                    Log.d("RError",ex.toString());
+                    Toast.makeText(getContext(), "Error en realm", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
