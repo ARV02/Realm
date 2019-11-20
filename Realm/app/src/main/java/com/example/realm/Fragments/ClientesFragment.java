@@ -3,6 +3,7 @@ package com.example.realm.Fragments;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.solver.widgets.Snapshot;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -14,7 +15,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.realm.R;
+import com.example.realm.app.MyApplication;
 import com.example.realm.models.Cliente;
+
+import java.util.UUID;
 
 import io.realm.Realm;
 
@@ -52,8 +56,10 @@ public class ClientesFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     realmDb.beginTransaction();
-                    Cliente cliente = realmDb.createObject(Cliente.class);
-                    int numero = Integer.parseInt(nume.getText().toString());
+                    Number maxId = realmDb.where(Cliente.class).max("id");
+                    int nextId = (maxId == null) ? 1 : maxId.intValue() + 1;
+                    Cliente cliente = realmDb.createObject(Cliente.class, nextId);
+                    String numero = nume.getText().toString();
                     String nom = nomb.getText().toString();
                     String apellido = apellidos.getText().toString();
                     String email = correo.getText().toString();

@@ -15,13 +15,14 @@ import io.realm.RealmResults;
 
 public class MyApplication extends Application {
     public static AtomicInteger BoardId = new AtomicInteger();
-    public static AtomicInteger NoteId = new AtomicInteger();
+    public static AtomicInteger ClienteId = new AtomicInteger();
     public void onCreate(){
         super.onCreate();
         setUpRealConfig();
         Realm realm = Realm.getDefaultInstance();
         BoardId = getIdbyTable(realm, Board.class);
-        NoteId = getIdbyTable(realm, Cliente.class);
+        ClienteId = getIdbyTable(realm, Cliente.class);
+        realm.close();
     }
     private void setUpRealConfig(){
         Realm.init(getApplicationContext());
@@ -30,8 +31,8 @@ public class MyApplication extends Application {
                 build();
         Realm.setDefaultConfiguration(configuration);
     }
-    private <T extends RealmObject> AtomicInteger getIdbyTable(Realm realm,Class<T>anyclass){
-        RealmResults<T> results= realm.where(anyclass).findAll();
+    private <T extends RealmObject> AtomicInteger getIdbyTable(Realm realm,Class<T>anyClass){
+        RealmResults<T> results= realm.where(anyClass).findAll();
         return (results.size()>0) ? new AtomicInteger(results.max("id").intValue()):new AtomicInteger();
     }
 }

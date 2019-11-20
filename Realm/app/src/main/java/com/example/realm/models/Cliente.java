@@ -5,20 +5,26 @@ import com.example.realm.app.MyApplication;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 public class Cliente extends RealmObject {
+    @PrimaryKey
     private int id;
+    @Required
     private String nombre;
+    @Required
     private String apellidos;
+    @Required
     private  String correo;
-    private int numero_de_telefono;
-    private Date createdAt;
+    @Required
+    private String numero_de_telefono;
 
     public Cliente() {
     }
 
     public void setId(int id){
-        this.id = MyApplication.NoteId.incrementAndGet();
+        this.id = MyApplication.ClienteId.incrementAndGet();
         this.id=0;
     }
     public int getId(){
@@ -30,10 +36,10 @@ public class Cliente extends RealmObject {
     public String getCorreo(){
         return correo;
     }
-    public void setNumero_de_telefono(int numero_de_telefono){
+    public void setNumero_de_telefono(String numero_de_telefono){
         this.numero_de_telefono=numero_de_telefono;
     }
-    public int getNumero_de_telefono(){
+    public String getNumero_de_telefono(){
         return numero_de_telefono;
     }
     public void setNombre(String nombre){
@@ -47,11 +53,5 @@ public class Cliente extends RealmObject {
     }
     public String getApellidos(){
         return apellidos;
-    }
-    public void setCreatedAt(Date createdAt){
-        this.createdAt=createdAt;
-    }
-    public Date getCreatedAt(){
-        return createdAt;
     }
 }

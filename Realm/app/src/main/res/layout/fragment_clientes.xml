@@ -51,7 +51,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="Numero de telefono"
-        android:inputType="phone" />
+        android:inputType="text" />
     <Button
         android:id="@+id/guardar"
         android:layout_width="wrap_content"
